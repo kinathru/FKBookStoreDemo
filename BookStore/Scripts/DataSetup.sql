@@ -1,15 +1,15 @@
 USE [TestWork]
 GO
-/****** Object:  Schema [bookstore]    Script Date: 10/16/2022 2:35:19 PM ******/
+/****** Object:  Schema [bookstore]    Script Date: 10/16/2022 2:58:24 PM ******/
 CREATE SCHEMA [bookstore]
 GO
-/****** Object:  Table [bookstore].[Author]    Script Date: 10/16/2022 2:35:19 PM ******/
+/****** Object:  Table [bookstore].[Author]    Script Date: 10/16/2022 2:58:24 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [bookstore].[Author](
-                                     [Id] [int] IDENTITY(1,1) NOT NULL,
+                                     [Id] [int] NOT NULL,
                                      [AuthorName] [varchar](50) NOT NULL,
                                      CONSTRAINT [PK_Author] PRIMARY KEY CLUSTERED
                                          (
@@ -17,13 +17,13 @@ CREATE TABLE [bookstore].[Author](
                                              )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [bookstore].[Book]    Script Date: 10/16/2022 2:35:19 PM ******/
+/****** Object:  Table [bookstore].[Book]    Script Date: 10/16/2022 2:58:24 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [bookstore].[Book](
-                                   [Id] [int] IDENTITY(1,1) NOT NULL,
+                                   [Id] [int] NOT NULL,
                                    [AuthorId] [int] NOT NULL,
                                    [BookName] [varchar](50) NOT NULL,
                                    CONSTRAINT [PK_Book] PRIMARY KEY CLUSTERED
@@ -32,7 +32,7 @@ CREATE TABLE [bookstore].[Book](
                                            )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [bookstore].[Chapter]    Script Date: 10/16/2022 2:35:19 PM ******/
+/****** Object:  Table [bookstore].[Chapter]    Script Date: 10/16/2022 2:58:24 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -62,4 +62,24 @@ ALTER TABLE [bookstore].[Chapter]  WITH CHECK ADD  CONSTRAINT [FK_Chapter_Book] 
     REFERENCES [bookstore].[Book] ([Id])
 GO
 ALTER TABLE [bookstore].[Chapter] CHECK CONSTRAINT [FK_Chapter_Book]
+GO
+
+/****** Object:  Sequence [dbo].[AuthorIdSeq]    Script Date: 10/16/2022 2:59:05 PM ******/
+CREATE SEQUENCE [dbo].[AuthorIdSeq]
+    AS [int]
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE -2147483648
+    MAXVALUE 2147483647
+    NO CACHE
+GO
+
+/****** Object:  Sequence [dbo].[BookIdSeq]    Script Date: 10/16/2022 2:59:22 PM ******/
+CREATE SEQUENCE [dbo].[BookIdSeq]
+    AS [int]
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE -2147483648
+    MAXVALUE 2147483647
+    NO CACHE
 GO
